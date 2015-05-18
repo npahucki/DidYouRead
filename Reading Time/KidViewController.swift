@@ -10,22 +10,90 @@ import UIKit
 
 class KidViewController: UIViewController {
 
-    @IBOutlet weak var closeButton: UIButton!
+    var kid : Kid!
+    
+    @IBOutlet weak var doneButton: UIBarButtonItem!
+    
+    @IBOutlet weak var kidNameTextField: UITextField!
+    
+    @IBOutlet weak var birthDatePicker: UIDatePicker!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        closeButton.setTitle("Cerrar", forState: UIControlState.Normal)
+        
+        PFInstallation.currentInstallation() // THIS IS A NOOP DUMMY THAT IS NEEDED TO BE ABLE TO CALL THE CORRECT CONSTRUCTOR ON Kid()
+        birthDatePicker.maximumDate = NSDate()
+        
+        if kid != nil {
+            kid.fetchIfNeededInBackgroundWithBlock({ (populatedKid : PFObject?, err : NSError?) -> Void in
+                if let localPopulatedKid = populatedKid as? Kid {
+                    self.kid = localPopulatedKid
+                    self.kidNameTextField.text = localPopulatedKid.name
+                    self.birthDatePicker.date = localPopulatedKid.birthDate
+                } else {
+                    self.kid = Kid()
+                    self.kid.birthDate = NSDate()
+                }
+            })
+        } else {
+            kid = Kid()
+            kid.birthDate = NSDate()
+        }
+        
+        //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkReachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "networkReachabilityChanged:", name: kReachabilityChangedNotification, object: nil)
+        
         // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
-    @IBAction func didTouchCloseButton(sender: UIButton) {
-        dismissViewControllerAnimated(true, completion: nil)
+    func networkReachabilityChanged(notification : NSNotification){
+        
+        let reachability = notification.object as! Reachability
+        let reachable = reachability.currentReachabilityStatus() != NetworkStatus.NotReachable
+        doneButton.enabled = reachable
+        println("reachability changed")
+        
+        if !reachable {
+            UIAlertView(title: "No internet connection", message: "To add or edit your child have to have an internet connection", delegate: nil, cancelButtonTitle: "Ok").show()
+        }
+
+        
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        doneButton.enabled = Reachability.isParseCurrentlyReachable()
+        
+    }
+    
+    @IBAction func didTouchDoneButton(sender: AnyObject) {
+        
+        
+        kid.name = kidNameTextField.text
+        kid.birthDate = birthDatePicker.date
+        if kid.isDirty() {
+            kid.saveEventually().continueWithExecutor(BFExecutor.mainThreadExecutor(), withSuccessBlock: { (kidSaveTask : BFTask!) -> AnyObject! in
+                Installation.currentInstallation().kid = self.kid
+                return Installation.currentInstallation().saveEventually()
+            }).continueWithExecutor(BFExecutor.mainThreadExecutor(), withBlock: { (installSaveTask : BFTask!) -> AnyObject! in
+                
+                // TODO: Change this!
+                if let error = installSaveTask.error {
+                    println("Could not save installation or child. Error \(error)")
+                }
+                return nil
+            })
+        }
+        navigationController?.popViewControllerAnimated(true)
+    }
+    
+    
 
     /*
     // MARK: - Navigation

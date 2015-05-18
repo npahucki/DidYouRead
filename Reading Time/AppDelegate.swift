@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -18,6 +19,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         Parse.setApplicationId("onfsQ5VxjhnwBjGGxqBI6VJRflZ0QMSFauc06d7P",
             clientKey: "zkmwdVL25lZFkGLwjW9ypIEj2jkvlSPrqEIfj0Ta")
+        Kid.registerSubclass()
+        Installation.registerSubclass()
+        Reading.registerSubclass()
+        
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound |
+            UIUserNotificationType.Alert | UIUserNotificationType.Badge, categories: nil))
+
+        let notifications = UIApplication.sharedApplication().scheduledLocalNotifications as! [UILocalNotification]
+
+        if notifications.count == 0 { //if there are no scheduled notifications, we'll schedule a repeating one for tomorrow 7pm
+            TimerUtil.scheduleTodayOrTomorrowReminder()
+        }
+        
         return true
     }
 
@@ -37,6 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        // TODO: Cache last reading date with 
+        // TODO: get currentInstallation.kid so it's cached for the kidViewController
+        
     }
 
     func applicationWillTerminate(application: UIApplication) {

@@ -5,7 +5,8 @@
 #ifndef Reading_Time_Bridging_Header_h
 #define Reading_Time_Bridging_Header_h
 
+
 #import <Parse/Parse.h>
-#import <Parse/PFObject+Subclass.h>
 #import <Bolts/Bolts.h>
+#import "Reachability.h"
 #endif
