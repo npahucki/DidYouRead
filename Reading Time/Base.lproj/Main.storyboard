@@ -103,28 +103,6 @@
                                     <constraint firstAttribute="centerY" secondItem="FQM-qb-kWq" secondAttribute="centerY" id="AkL-HV-EM9"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="epT-wG-yd5" userLabel="Test View">
-                                <rect key="frame" x="0.0" y="64" width="600" height="386"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="test How long did you read today?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2s-sV-BEN">
-                                        <rect key="frame" x="8" y="8" width="265" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="fpn-XS-Eqo" userLabel="How Long Slider">
-                                        <rect key="frame" x="10" y="178" width="300" height="31"/>
-                                        <connections>
-                                            <action selector="howLongSliderValueChange:" destination="vXZ-lx-hvc" eventType="valueChanged" id="VhD-Ts-4UJ"/>
-                                        </connections>
-                                    </slider>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="X2s-sV-BEN" firstAttribute="leading" secondItem="epT-wG-yd5" secondAttribute="leadingMargin" id="Qry-tJ-mdw"/>
-                                    <constraint firstItem="X2s-sV-BEN" firstAttribute="top" secondItem="epT-wG-yd5" secondAttribute="topMargin" id="rwK-ZB-Nbo"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -132,22 +110,18 @@
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="oH6-J5-1Af" secondAttribute="bottom" id="6PL-Tu-7HE"/>
                             <constraint firstItem="UWA-4G-rb2" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="994-rK-PeJ"/>
                             <constraint firstItem="oH6-J5-1Af" firstAttribute="top" secondItem="UWA-4G-rb2" secondAttribute="bottom" id="BF8-IA-2QR"/>
-                            <constraint firstItem="epT-wG-yd5" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="F66-eN-OkU"/>
                             <constraint firstItem="UWA-4G-rb2" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="FSl-gN-yDQ"/>
                             <constraint firstItem="UWA-4G-rb2" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="I7s-ve-zas"/>
                             <constraint firstAttribute="trailing" secondItem="oH6-J5-1Af" secondAttribute="trailing" id="KO0-SV-bxT"/>
                             <constraint firstAttribute="bottom" secondItem="oH6-J5-1Af" secondAttribute="bottom" id="LoX-Gd-HVR"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="epT-wG-yd5" secondAttribute="bottom" constant="150" id="Nzc-0b-Uzw"/>
                             <constraint firstItem="oH6-J5-1Af" firstAttribute="top" secondItem="UWA-4G-rb2" secondAttribute="bottom" id="OtO-u5-gyz"/>
                             <constraint firstItem="oH6-J5-1Af" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="TMr-xK-bNZ"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="UWA-4G-rb2" secondAttribute="bottom" id="Wv9-mp-e60"/>
                             <constraint firstAttribute="trailing" secondItem="UWA-4G-rb2" secondAttribute="trailing" id="ZpG-eb-mfO"/>
-                            <constraint firstItem="epT-wG-yd5" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="aQC-Fn-Dvu"/>
                             <constraint firstItem="oH6-J5-1Af" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="doi-we-T85"/>
                             <constraint firstAttribute="trailing" secondItem="oH6-J5-1Af" secondAttribute="trailing" id="lCQ-na-PWe"/>
                             <constraint firstItem="oH6-J5-1Af" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="nsO-vm-7V2"/>
                             <constraint firstItem="UWA-4G-rb2" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="sey-73-RSM"/>
-                            <constraint firstAttribute="trailing" secondItem="epT-wG-yd5" secondAttribute="trailing" id="yzE-qt-aOB"/>
                             <constraint firstItem="UWA-4G-rb2" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="zy6-FL-LSr"/>
                         </constraints>
                         <variation key="default">
@@ -175,12 +149,9 @@
                         <outlet property="doneView" destination="oH6-J5-1Af" id="Otq-Gd-d12"/>
                         <outlet property="doneViewLabel" destination="FQM-qb-kWq" id="3sg-Me-rde"/>
                         <outlet property="howLongLabel" destination="tRo-U0-fR4" id="HYf-Vu-pAx"/>
-                        <outlet property="howLongLabelTest" destination="X2s-sV-BEN" id="FSS-Ej-Mas"/>
                         <outlet property="howLongPicker" destination="dzT-PQ-zf1" id="HQw-U4-ATm"/>
-                        <outlet property="howLongSlider" destination="fpn-XS-Eqo" id="FHu-9e-eHN"/>
                         <outlet property="recordView" destination="UWA-4G-rb2" id="HBw-om-3H9"/>
                         <outlet property="saveButton" destination="ti7-Lw-U7e" id="Zwb-BM-e8I"/>
-                        <outlet property="testView" destination="epT-wG-yd5" id="YE7-4x-0kV"/>
                         <outlet property="whatDidLabel" destination="Ai9-Na-If2" id="Z4X-6l-5pW"/>
                         <outlet property="whatDidPicker" destination="HFe-Nm-oA3" id="5eL-Ow-SbD"/>
                     </connections>

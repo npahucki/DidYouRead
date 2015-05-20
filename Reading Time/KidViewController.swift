@@ -60,7 +60,6 @@ class KidViewController: UIViewController {
         let reachability = notification.object as! Reachability
         let reachable = reachability.currentReachabilityStatus() != NetworkStatus.NotReachable
         doneButton.enabled = reachable
-        println("reachability changed")
         
         if !reachable {
             UIAlertView(title: "No internet connection", message: "To add or edit your child have to have an internet connection", delegate: nil, cancelButtonTitle: "Ok").show()
@@ -92,7 +91,7 @@ class KidViewController: UIViewController {
                 self.doneButton.enabled = true
                 // TODO: Change this!
                 if let error = installSaveTask.error {
-                    println("Could not save installation or child. Error \(error)")
+//                    println("Could not save installation or child. Error \(error)")
                 }
                 else {
                     self.navigationController?.popViewControllerAnimated(true)
