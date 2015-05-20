@@ -18,6 +18,9 @@ class KidViewController: UIViewController {
     
     @IBOutlet weak var birthDatePicker: UIDatePicker!
     
+    @IBOutlet var kidView: UIView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -73,27 +76,34 @@ class KidViewController: UIViewController {
     }
     
     @IBAction func didTouchDoneButton(sender: AnyObject) {
+
+        let loadingNotification = MBProgressHUD.showHUDAddedTo(kidView, animated: true)
+        loadingNotification.mode = MBProgressHUDMode.Indeterminate
+        loadingNotification.labelText = "Saving"
         
-        
+        doneButton.enabled = false
         kid.name = kidNameTextField.text
         kid.birthDate = birthDatePicker.date
         if kid.isDirty() {
-            kid.saveEventually().continueWithExecutor(BFExecutor.mainThreadExecutor(), withSuccessBlock: { (kidSaveTask : BFTask!) -> AnyObject! in
+            kid.saveInBackground().continueWithExecutor(BFExecutor.mainThreadExecutor(), withSuccessBlock: { (kidSaveTask : BFTask!) -> AnyObject! in
                 Installation.currentInstallation().kid = self.kid
-                return Installation.currentInstallation().saveEventually()
+                return Installation.currentInstallation().saveInBackground()
             }).continueWithExecutor(BFExecutor.mainThreadExecutor(), withBlock: { (installSaveTask : BFTask!) -> AnyObject! in
-                
+                self.doneButton.enabled = true
                 // TODO: Change this!
                 if let error = installSaveTask.error {
                     println("Could not save installation or child. Error \(error)")
                 }
+                else {
+                    self.navigationController?.popViewControllerAnimated(true)
+                }
+                MBProgressHUD.hideAllHUDsForView(self.kidView, animated: true)
                 return nil
             })
         }
-        navigationController?.popViewControllerAnimated(true)
     }
     
-    
+    //
 
     /*
     // MARK: - Navigation

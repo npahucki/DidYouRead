@@ -10,6 +10,17 @@ import UIKit
 
 class MainViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
+    @IBOutlet weak var testView: UIView!
+    @IBOutlet weak var howLongLabelTest: UILabel!
+    @IBOutlet weak var howLongSlider: UISlider!
+    
+    @IBAction func howLongSliderValueChange(sender: UISlider) {
+        sender.setValue(round(sender.value), animated: true)
+        var currentValue = Int(sender.value)
+        howLongLabelTest.text = howLongPickerData[currentValue]
+    }
+    
+    
     @IBOutlet weak var doneView: UIView!
     @IBOutlet weak var recordView: UIView!
     @IBOutlet weak var howLongLabel: UILabel!
@@ -52,7 +63,10 @@ class MainViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         if let lastNotedReading = NSUserDefaults.standardUserDefaults().objectForKey("lastNotedReadingDate") as? NSDate {
             showDoneView = lastNotedReading.isSameDayAsToday()
         }
-        
+
+//        doneView.hidden = true
+//        recordView.hidden = true
+//        testView.hidden = false
         doneView.hidden = !showDoneView
         recordView.hidden = showDoneView
         

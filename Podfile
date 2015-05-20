@@ -3,6 +3,7 @@
 
 target 'Reading Time' do
     pod 'Parse'
+    pod 'MBProgressHUD', '~> 0.5'
 end
 
 target 'Reading TimeTests' do

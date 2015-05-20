@@ -9,4 +9,5 @@
 #import <Parse/Parse.h>
 #import <Bolts/Bolts.h>
 #import "Reachability.h"
+#import "MBProgressHUD.h"
 #endif
